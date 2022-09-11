@@ -26,8 +26,39 @@
   display: none
 }
 
+.h-7 {
+  height: 1.75rem
+}
+
+.w-7 {
+  width: 1.75rem
+}
+
+.rounded-full {
+  border-radius: 9999px
+}
+
 .border {
   border-width: 1px
+}
+
+.bg-gray-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity))
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
+.font-bold {
+  font-weight: 700
 }
 
 .uppercase {
@@ -41,4 +72,9 @@
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity))
+}
+
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity))
 }
