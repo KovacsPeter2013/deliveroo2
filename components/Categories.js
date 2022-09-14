@@ -18,12 +18,16 @@ const Categories = () => {
     >
 
 
-      
+
     <CategoryCard imgUrl="https://links.papareact.com/gn7"
      title="teszt"/>
     <CategoryCard imgUrl="https://links.papareact.com/gn7"
      title="teszt"/>
     <CategoryCard imgUrl="https://links.papareact.com/gn7" 
+    title="teszt"/>
+        <CategoryCard imgUrl="https://links.papareact.com/gn7" 
+    title="teszt"/>
+        <CategoryCard imgUrl="https://links.papareact.com/gn7" 
     title="teszt"/>
     
  
