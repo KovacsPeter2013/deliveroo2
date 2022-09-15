@@ -1,10 +1,7 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { useRoute } from '@react-navigation/native'
-
-
-
-
+import { View, Text, ScrollView, Image } from 'react-native'
+import React, { useLayoutEffect } from 'react'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { urlFor } from '../sanity';
 
 
 
@@ -14,7 +11,7 @@ import { useRoute } from '@react-navigation/native'
 
 const RestaurantScreen = () => {
 
-
+    const navigation = useNavigation();
     const {params: {
 
         id,
@@ -29,10 +26,26 @@ const RestaurantScreen = () => {
         lat
     }} = useRoute();
 
+
+    useLayoutEffect(() => {
+
+       navigation.setOptions({
+        headerShown: false,
+       });
+
+    },[]);
+
   return (
-    <View>
-      <Text>{title}</Text>
-    </View>
+    <ScrollView>
+      <View>
+        <Image 
+        source = {{
+            uri: urlFor(imgUrl).url(),
+        }}
+        className="w-full h-56 bg-gray-300 p-4"
+        />
+      </View>
+    </ScrollView>
   )
 }
 
