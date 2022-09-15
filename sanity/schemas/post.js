@@ -1,65 +1,65 @@
 export default {
-  name: 'post',
-  title: 'Post',
+  name: 'restaurant',
+  title: 'Restaurant',
   type: 'document',
   fields: [
     {
-      name: 'title',
-      title: 'Title',
-      type: 'string',
+      name: "name",
+      type: "string",
+      title: "Restaurant name",
+      validation: (Rule) => Rule.required(),
+
     },
+
     {
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
+      name: "image",
+      type: "image", 
+      title: "Fotó az étteremről",
     },
+
     {
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: {type: 'author'},
+      name: "lat",
+      type: "number",
+      title: "latitude of the restaurant"
     },
+    
     {
-      name: 'mainImage',
-      title: 'Main image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      name: "long",
+      type: "number",
+      title: "longitude of the restaurant"
     },
+
+
     {
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
-    },
+      name: "address",
+      type: "string",
+      title: "Étterem címe",
+      validation: (Rule) => Rule.required(),
+    }, 
+
+
     {
-      name: 'publishedAt',
-      title: 'Published at',
-      type: 'datetime',
+      name: "rating",
+      type: "string",
+      title: "Adj meg értékelést  1 és 5 között",
+      validation: (Rule) => 
+      Rule.required()
+      .min(1)
+      .max(5)
+      .error("Kérjük 1 és között adj meg egy értéket")
     },
+
     {
-      name: 'body',
-      title: 'Body',
-      type: 'blockContent',
-    },
+      name: "type",     
+      title: "Category",
+      validation: (Rule) =>Rule.required(),
+      type: "reference",
+      of: [{type: "reference", to: [{type: "dish"}]  }],
+
+    }
+
+
   ],
 
-  preview: {
-    select: {
-      title: 'title',
-      author: 'author.name',
-      media: 'mainImage',
-    },
-    prepare(selection) {
-      const {author} = selection
-      return Object.assign({}, selection, {
-        subtitle: author && `by ${author}`,
-      })
-    },
-  },
+
 }

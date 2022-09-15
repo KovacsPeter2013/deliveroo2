@@ -6,7 +6,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { TailwindProvider } from "tailwind-rn/dist";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -17,9 +17,21 @@ import {
 } from "react-native-heroicons/outline";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
+import client from "../sanity";
+//import category from "../sanity/schemas/category";
+//import restaurant from "../sanity/schemas/restaurant";
+//import dish from "../sanity/schemas/dish";
+//import post from "../sanity/schemas/post";
+
+
+
 
 const HomeScreen = () => {
+
+
   const navigation = useNavigation();
+
+  const [featuredCategories, setFeaturedCategories] = useState([])
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -28,6 +40,26 @@ const HomeScreen = () => {
     });
   }, []);
 
+  useEffect(() => {
+
+    client.fetch(`
+
+      *[_type == "featured"]{
+        ...,
+        restaurants[]->{
+          ...,
+          dishes[]->
+        }
+      }
+      
+      `).then(data => {
+
+        setFeaturedCategories(data)
+      });
+
+  }, []);
+
+  //console.log(featuredCategories)
   return (
     <SafeAreaView className="bg-white pt-5">
       <View className="flex-row pb-3 items-center mx-4 space-x-2 ">
@@ -69,26 +101,18 @@ const HomeScreen = () => {
       >
         <Categories />
 
-        <FeaturedRow
-          id="123"
-          title="Kiemelt"
-          description="Ide kerülnek a partnerek kiemelt hirdetései"
-          featuredCategory="kiemelt"
-        />
 
-        <FeaturedRow
-          id="12qwew3"
-          title="Ízletes diszkont"
-          description="Ide kerülnek a partnerek kiemelt hirdetései"
-          featuredCategory="diszkont"
-        />
 
-        <FeaturedRow
-          id="12erer3"
-          title="Ajánlat a közeledben"
-          description="Ide kerülnek a partnerek kiemelt hirdetései"
-          featuredCategory="ajánlat"
-        />
+          {featuredCategories?.map(category => (
+            <FeaturedRow
+            key={category._id}
+            id={category._id}
+            title={category.name}
+            description={category.short_description}
+          
+          />
+          ))}
+
       </ScrollView>
     </SafeAreaView>
   );
