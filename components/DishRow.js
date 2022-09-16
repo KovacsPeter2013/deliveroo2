@@ -24,8 +24,8 @@ const DishRow = ({ id, name, description, price, image }) => {
               <Text>{price} Ft.</Text>
             </Text>
           </View>
-
           <View>
+            
             <Image
               style={{
                 borderWidth: 1,
@@ -48,8 +48,6 @@ const DishRow = ({ id, name, description, price, image }) => {
              </TouchableOpacity>
 
               <Text>0</Text>
-
-
               <TouchableOpacity>
               <PlusCircleIcon
                   color="#00CCBB" 
